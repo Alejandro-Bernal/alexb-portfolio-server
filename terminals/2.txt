@@ -1,0 +1,11 @@
+---
+pid: 42020
+cwd: "C:\Users\alexb\moose-os-backend"
+command: ".venv\\Scripts\\uvicorn.exe app.main:app --host 127.0.0.1 --port 8000"
+started_at: 2026-07-05T09:06:25.910Z
+running_for_ms: 1650007  
+---
+INFO:     Started server process [22036]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
