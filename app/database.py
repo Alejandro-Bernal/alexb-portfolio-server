@@ -9,8 +9,7 @@ from app.config import DATABASE_URL
 class Base(DeclarativeBase):
     pass
 
-
-engine = create_async_engine(DATABASE_URL, echo=False)
+engine = create_async_engine(str(DATABASE_URL), echo=False)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 
