@@ -6,3 +6,6 @@ sqlalchemy[asyncio]
 asyncpg
 resend
 alembic==1.18.5
+pydantic==2.13.4
+pydantic_core==2.46.4
+slowapi==0.1.10
