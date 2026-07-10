@@ -16,6 +16,8 @@ class FollowUpRequest(Base):
     __tablename__ = "follow_up_requests"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    email = Column(String, index=True, nullable=False)
     subject = Column(String, nullable=False)
     message = Column(Text, nullable=False)
     created_at = Column(
