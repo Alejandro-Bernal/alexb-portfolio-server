@@ -1,3 +1,3 @@
-from app.api.routes.contact import router as contact_router
+from app.api.routes.inquiries import router as inquiries_router
 
-__all__ = ["contact_router"]
+__all__ = ["inquiries_router"]

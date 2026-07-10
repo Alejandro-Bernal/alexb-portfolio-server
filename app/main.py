@@ -57,7 +57,7 @@ app.add_middleware(
 )
 
 
-app.include_router(contact_router)
+app.include_router(inquiries_router)
 
 
 @app.get("/health")
