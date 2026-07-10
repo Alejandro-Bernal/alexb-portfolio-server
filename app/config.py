@@ -18,3 +18,7 @@ if not CONTACT_ROUTING_EMAIL:
 RESEND_FROM_EMAIL = os.getenv("RESEND_FROM_EMAIL")
 if not RESEND_FROM_EMAIL:
     raise ValueError("RESEND_FROM_EMAIL environment variable not set")
+
+API_KEY = os.getenv("API_KEY")
+if not API_KEY:
+    raise ValueError("API_KEY environment variable not set")
