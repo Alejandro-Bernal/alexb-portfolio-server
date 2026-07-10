@@ -6,6 +6,7 @@ from slowapi.errors import RateLimitExceeded
 
 from app.api.routes import inquiries_router
 from app.limiter import limiter
+from app.logging_config import setup_logging
 
 
 # This is our new, correctly typed handler
@@ -28,12 +29,17 @@ async def rate_limit_exceeded_handler(request: Request, exc: Exception):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # You can leave this empty or add other startup logic later
-    print("Starting up...")
+    setup_logging()
     yield
-    print("Shutting down...")
 
 
-app = FastAPI(title="Moose OS Backend", lifespan=lifespan)
+app = FastAPI(
+    title="Moose-OS Backend",
+    description="API for Moose-OS portfolio website.",
+    version="0.1.0",
+    lifespan=lifespan, # Use the lifespan manager
+)
+
 
 # 2. Add the limiter to the app's state and attach the exception handler
 app.state.limiter = limiter
