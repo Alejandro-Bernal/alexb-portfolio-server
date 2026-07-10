@@ -1,12 +1,30 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi.errors import RateLimitExceeded
 
-from app.api.routes import contact_router
-from app.database import init_db
-from app.models import contact_submission  # noqa: F401 — register table with SQLAlchemy
+from app.api.routes import inquiries_router
+from app.limiter import limiter
 
 
+# This is our new, correctly typed handler
+async def rate_limit_exceeded_handler(request: Request, exc: Exception):
+    """
+    Custom handler for when a rate limit is exceeded.
+    """
+    # This check proves to the type checker that exc is a RateLimitExceeded instance
+    if isinstance(exc, RateLimitExceeded):
+        return JSONResponse(
+            status_code=429,
+            content={"detail": f"Rate limit exceeded: {exc.detail}"},
+        )
+    # Fallback for any other unexpected case
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "An unexpected error occurred"},
+    )
+    
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # You can leave this empty or add other startup logic later
@@ -16,6 +34,11 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Moose OS Backend", lifespan=lifespan)
+
+# 2. Add the limiter to the app's state and attach the exception handler
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
+
 
 # Configure CORS (Cross-Origin Resource Sharing)
 origins = [
