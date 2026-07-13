@@ -49,9 +49,11 @@ app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 # Configure CORS (Cross-Origin Resource Sharing)
 origins = [
     "http://localhost",
-    "http://localhost:3000",  # Example for a frontend running on localhost:3000
-    "http://127.0.0.1:3000",  # Another common localhost address for the frontend
-    "http://localhost:8000",  # Another common localhost address for the frontend
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://localhost:5173",      # ← Add this (your Vite dev server)
+    "http://127.0.0.1:5173",      # ← And this
 ]
 
 app.add_middleware(
