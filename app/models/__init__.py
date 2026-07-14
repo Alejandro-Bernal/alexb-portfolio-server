@@ -1,4 +1,4 @@
-from app.models.contact import ContactForm
-from app.models.contact_submission import ContactSubmission
+from .contact_submission import ContactSubmission
+from .follow_up_request import FollowUpRequest
 
-__all__ = ["ContactForm", "ContactSubmission"]
+__all__ = ["ContactSubmission", "FollowUpRequest"]

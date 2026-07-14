@@ -32,8 +32,8 @@ def _send_contact_email_sync(form: ContactForm) -> str:
 
     result = resend.Emails.send(
         {
-            "from": RESEND_FROM_EMAIL,
-            "to": [CONTACT_ROUTING_EMAIL],
+            "from": str(RESEND_FROM_EMAIL),
+            "to": [str(CONTACT_ROUTING_EMAIL)],
             "reply_to": [str(form.email)],
             "subject": f"[Contact] {form.subject}",
             "html": _build_contact_email_html(form),
